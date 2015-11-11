@@ -38,8 +38,8 @@ function init() {
     }
 
 
-    var cubeSize = 10
-    var cubeDetail = 5
+    var cubeSize = 0.1
+    var cubeDetail = 1
     var cubeGeo = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize, cubeDetail, cubeDetail, cubeDetail)
     var cubeMaterial = new THREE.MeshPhongMaterial({
         color: 0x2ecc71,
@@ -47,9 +47,21 @@ function init() {
         side: THREE.DoubleSide,
         shading: THREE.FlatShading
     })
-    cube = new THREE.Mesh(cubeGeo, cubeMaterial)
     
-    scene.add(cube)
+    var start = -3
+    var end = 3
+    
+    for(var x = start; x <= end; x++)
+    for(var y = start; y <= end; y++)
+    for(var z = start; z <= end; z++){
+        var cube = new THREE.Mesh(cubeGeo, cubeMaterial)
+        cube.position.x = x
+        cube.position.y = y
+        cube.position.z = z
+        scene.add(cube)
+    }
+    
+    
 
 
 
@@ -83,7 +95,11 @@ function animate() {
 function render() {
     //code which re-runs every frame update
     
+    // cube.position.x = 10 * Math.sin(Date.now() / 100)
+    // cube.position.y = 10 * Math.cos(Date.now() / 100)
+    // cube.position.z = 10 * Math.sin(Date.now() / 100) * Math.cos(Date.now() / 100)
+    
     camera.lookAt( scene.position );
     renderer.render( scene, camera );
-    cube.geometry.verticesNeedUpdate = true
+    // cube.geometry.verticesNeedUpdate = true
 }
