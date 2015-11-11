@@ -3,7 +3,7 @@ var camera, scene, renderer;
 var mouseX = 0, mouseY = 0;
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
-
+var cube
 //declare global variables up here
 
 init();
@@ -47,8 +47,7 @@ function init() {
         side: THREE.DoubleSide,
         shading: THREE.FlatShading
     })
-    var cube = new THREE.Mesh(cubeGeo, cubeMaterial)
-    cube.geometry.verticesNeedUpdate = true
+    cube = new THREE.Mesh(cubeGeo, cubeMaterial)
     
     scene.add(cube)
 
@@ -83,6 +82,8 @@ function animate() {
 }
 function render() {
     //code which re-runs every frame update
+    
     camera.lookAt( scene.position );
     renderer.render( scene, camera );
+    cube.geometry.verticesNeedUpdate = true
 }
